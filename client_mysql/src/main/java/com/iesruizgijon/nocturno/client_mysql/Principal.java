@@ -4,6 +4,8 @@
  */
 package com.iesruizgijon.nocturno.client_mysql;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author grafeno30
@@ -85,11 +87,27 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       
+        ArrayList<String> tabla =null;
         
+        BaseDatos bd = new BaseDatos("northwind","root", "123qweASD_");
+       
+        tabla =bd.getQuery(entrada.getText());
+        
+        String contenido = "";
+        
+        for (String elemento : tabla) {
+            
+            contenido = contenido + elemento + "\n";
+        }
+        
+        salida.setText(contenido);
+        
+        bd.Desconecta();
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
