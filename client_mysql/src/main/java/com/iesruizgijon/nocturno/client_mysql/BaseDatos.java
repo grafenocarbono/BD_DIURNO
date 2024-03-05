@@ -32,14 +32,19 @@ public class BaseDatos {
         this.nameDB = nameDB;
     }
 
-    public void Conecta() {
+    public boolean Conecta() {
 
+        boolean conectado = false;
+        
         try {
             conexion = DriverManager.getConnection(URL + nameDB, USER, PASS);
-            System.out.println("Conexión establecida...");
+            conectado = true;
+           
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return conectado;
     }
 
     public void Desconecta() {
@@ -177,11 +182,13 @@ public class BaseDatos {
             
             while (resultado.next()) {
                 for (int i = 0; i <numeroColumnas;i++){
-                    fila = fila + resultado.getString(i+1);
+                    fila = fila + " | " + resultado.getString(i+1);
                 }
                tabla.add(fila);
+               fila = new String();
 
             }
+            
             resultado.close();
             sentencia.close();
 
